@@ -60,7 +60,7 @@ export const HeroPane = () => (
 
 ## Local development
 
-- `npm run dev` – launches the interactive playground inspired by [Mich Michaels’ Liquid Glass demo](https://michm.de/liquid-glass/).
+- `npm run dev` – launches the interactive playground inspired by [https://michm.de/liquid-glass/](https://michm.de/liquid-glass/).
 - `npm run build` – emits the bundled library (`dist/react-liquid-glass.*`) and TypeScript declarations (`dist/types`).
 - `npm run test` / `npm run test:watch` – runs the Vitest suite under JSDOM.
 - `npm run lint` – lints all TypeScript sources with ESLint and the React Compiler plugin.
