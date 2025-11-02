@@ -1,0 +1,3 @@
+export { LiquidGlass } from './lib/LiquidGlass'
+export type { LiquidGlassProps, LiquidGlassRef } from './lib/LiquidGlass'
+export { LiquidGlass as default } from './lib/LiquidGlass'
