@@ -20,6 +20,7 @@
   "scripts": {
     "dev": "vite",
     "build": "npm run typecheck && vite build",
+    "build:demo": "vite build --config vite.demo.config.ts",
     "typecheck": "tsc -p tsconfig.lib.json",
     "lint": "eslint .",
     "test": "vitest run",
