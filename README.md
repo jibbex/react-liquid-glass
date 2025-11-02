@@ -75,7 +75,3 @@ The repository includes a GitHub Actions workflow (`.github/workflows/ci.yml`) t
 - `src/demo` – bundled playground showcasing the component in action.
 - `src/__tests__` – Vitest unit tests covering the component contract.
 - `vitest.setup.ts` – shared testing utilities.
-
-## Next steps
-
-Replace the placeholder styling in `src/styles.css` with your production liquid glass effect. The component already exposes the core CSS variables and data attributes you'll need to hook in bespoke shaders, WebGL canvases, or animated gradients.

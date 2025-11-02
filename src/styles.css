@@ -12,7 +12,6 @@
   --rlg-radius: 28px;
   --rlg-border-color: rgba(255, 255, 255, 0.22);
   --rlg-shadow: rgba(15, 23, 42, 0.35);
-  --rlg-distort-filter: none;
 
   position: relative;
   display: block;
@@ -25,7 +24,8 @@
       transparent 60%),
     var(--rlg-tint);
   border: 1px solid var(--rlg-border-color);
-  backdrop-filter: blur(var(--rlg-blur-radius)) saturate(calc(130% + var(--rlg-intensity) * 120%)) brightness(calc(100% + var(--rlg-intensity) * 20%));
+  backdrop-filter: var(--rlg-backdrop-filter-prefix) blur(var(--rlg-blur-radius)) saturate(calc(130% + var(--rlg-intensity) * 120%)) brightness(calc(100% + var(--rlg-intensity) * 20%));
+  -webkit-backdrop-filter: var(--rlg-backdrop-filter-prefix) blur(var(--rlg-blur-radius)) saturate(calc(130% + var(--rlg-intensity) * 120%)) brightness(calc(100% + var(--rlg-intensity) * 20%));
   box-shadow:
     0 1.25rem 3.5rem rgba(9, 12, 24, calc(var(--rlg-intensity) * 0.45)),
     inset 0 0 0.75rem rgba(255, 255, 255, 0.04);
@@ -85,27 +85,11 @@
 
 .rlg-surface {
   position: relative;
-  color: #0d1325;
+  color: #0d1325ba;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
 }
 
-.rlg-surface .rlg-distort {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  display: block;
-  pointer-events: none;
-  background: inherit;
-  filter: var(--rlg-distort-filter, none);
-  opacity: 0.85;
-  mix-blend-mode: screen;
-}
-
-[data-liquid-glass]:not([data-liquid-glass-distortion]) .rlg-distort {
-  display: none;
-}
-
-[data-liquid-glass] > :not(.rlg-distort) {
+[data-liquid-glass] > * {
   position: relative;
   z-index: 2;
 }

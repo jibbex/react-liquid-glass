@@ -56,7 +56,7 @@ type LiquidGlassCSSVariables = CSSProperties & {
   '--rlg-highlight-strength'?: string
   '--rlg-blur-radius'?: string
   '--rlg-ripple-opacity'?: string
-  '--rlg-distort-filter'?: string
+  '--rlg-backdrop-filter-prefix'?: string
 }
 
 const clamp = (value: number, min: number, max: number) => {
@@ -167,9 +167,9 @@ export const LiquidGlass = forwardRef<LiquidGlassRef, LiquidGlassProps>(
       )}px`
       cssVariables['--rlg-highlight-color'] = highlightColor
       cssVariables['--rlg-tint'] = tint
-      cssVariables['--rlg-distort-filter'] = distortion
-        ? `url(#${distortionFilterId})`
-        : 'none'
+      cssVariables['--rlg-backdrop-filter-prefix'] = distortion
+        ? `url(#${distortionFilterId}) `
+        : ''
 
       return cssVariables
     }, [
@@ -207,7 +207,6 @@ export const LiquidGlass = forwardRef<LiquidGlassRef, LiquidGlassProps>(
         style={composedStyle}
         {...rest}
       >
-        <span className="rlg-distort" aria-hidden="true" />
         {children}
       </div>
     )

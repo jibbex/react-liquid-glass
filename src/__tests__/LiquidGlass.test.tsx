@@ -66,7 +66,7 @@ describe('LiquidGlass', () => {
 
     const element = screen.getByTestId('distort')
     expect(element.dataset.liquidGlassDistortion).toBe('')
-    expect(element.style.getPropertyValue('--rlg-distort-filter')).toBe('url(#test-distort-filter)')
+    expect(element.style.getPropertyValue('--rlg-backdrop-filter-prefix')).toBe('url(#test-distort-filter) ')
 
     const filter = document.getElementById('test-distort-filter')
     expect(filter).toBeTruthy()
