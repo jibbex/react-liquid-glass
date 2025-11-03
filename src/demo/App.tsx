@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { LiquidGlass } from '..'
+import LiquidGlass from '..'
 import type { LiquidGlassProps } from '..'
 import './App.css'
 
