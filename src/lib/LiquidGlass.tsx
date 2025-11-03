@@ -140,7 +140,7 @@ export const LiquidGlass = forwardRef<LiquidGlassRef, LiquidGlassProps>(
       style,
       intensity = 0.65,
       ripple = 0.35,
-      blurRadius = 36,
+      blurRadius = 18,
       tint = 'rgba(255, 255, 255, 0.16)',
       highlightColor = 'rgba(255, 255, 255, 0.6)',
       highlightStrength = 0.55,
