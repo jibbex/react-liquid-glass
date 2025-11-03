@@ -227,5 +227,3 @@ export const LiquidGlass = forwardRef<LiquidGlassRef, LiquidGlassProps>(
 );
 
 LiquidGlass.displayName = 'LiquidGlass';
-
-export default LiquidGlass;
