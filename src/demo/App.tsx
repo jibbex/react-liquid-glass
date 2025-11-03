@@ -35,6 +35,8 @@ type GalleryTile = {
 
 const IMAGE_BATCH_SIZE = 12
 
+const isFirefox = navigator.userAgent.includes('Firefox');
+
 const createTileBatch = (startIndex: number, count: number): GalleryTile[] =>
   Array.from({ length: count }, (_, offset) => {
     const index = startIndex + offset
@@ -258,6 +260,7 @@ const ControlsDrawer = ({
             <output>{ripple.toFixed(2)}</output>
           </label>
 
+
           <label className="demo-control" aria-disabled={!distortion}>
             <span className="demo-control__label">Distortion scale</span>
             <input
@@ -269,7 +272,7 @@ const ControlsDrawer = ({
               onChange={(event) =>
                 onDistortionScaleChange(Number(event.currentTarget.value))
               }
-              disabled={!distortion}
+              disabled={!distortion || isFirefox}
             />
             <output>{distortionScale.toFixed(0)}</output>
           </label>
@@ -292,7 +295,8 @@ const ControlsDrawer = ({
             <input
               id="demo-distortion-toggle"
               type="checkbox"
-              checked={distortion}
+              checked={distortion && !isFirefox}
+              disabled={isFirefox}
               onChange={(event) => onDistortionChange(event.currentTarget.checked)}
             />
             <label htmlFor="demo-distortion-toggle">
@@ -331,9 +335,8 @@ const App = () => {
   const [highlightStrength, setHighlightStrength] = useState(0.55)
   const [ripple, setRipple] = useState(0.35)
   const [animated, setAnimated] = useState(true)
-  const [distortion, setDistortion] = useState(true)
+  const [distortion, setDistortion] = useState(true && !isFirefox)
   const [distortionScale, setDistortionScale] = useState(48)
-
   const preset = PRESETS[presetId]
 
   const glassProps = useMemo<Partial<LiquidGlassProps>>(
@@ -395,9 +398,9 @@ const App = () => {
               <span className="rlg-badge">Preview</span>
               <h2>Immersive glassmorphism, distilled.</h2>
               <p>
-                Layer fluid reflections, subtle shimmer, and accent lighting to
-                craft tactile interfaces. The component handles the heavy lifting
-                so you can swap in your own effect implementation.
+                A React 18+ component that renders a liquid-glass surface with configurable blur, tint, 
+                highlight, and optional SVG distortion. The package ships the React component, the CSS 
+                that powers the effect, and a demo playground for quick exploration.
               </p>
               <div className="demo-actions">
                 <a
