@@ -162,7 +162,7 @@ export const LiquidGlass = forwardRef<LiquidGlassRef, LiquidGlassProps>(
       supportsCssFeature('-webkit-backdrop-filter', 'blur(1px)');
 
     const isFirefox = navigator.userAgent.includes('Firefox');
-    const supportsSvgFilter = supportsCssFeature('filter', `url(#${distortionFilterId})`);
+    const supportsSvgFilter = supportsCssFeature('backdrop-filter', `url(#${distortionFilterId})`);
 
     const shouldApplyDistortion = distortion && supportsBackdropFilter && supportsSvgFilter && !isFirefox;
 
