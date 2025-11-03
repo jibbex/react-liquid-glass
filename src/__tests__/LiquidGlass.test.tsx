@@ -1,13 +1,40 @@
 import { cleanup, render, screen } from '@testing-library/react'
-import { afterEach, describe, expect, it } from 'vitest'
-import { LiquidGlass } from '../lib/LiquidGlass'
+import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest'
+
+vi.mock('../styles.css', () => ({}))
+const { LiquidGlass } = await import('../lib/LiquidGlass')
+
+const cssSupportsMock = vi.fn()
+
+beforeAll(() => {
+  vi.stubGlobal('CSS', { supports: cssSupportsMock } as unknown as typeof CSS)
+})
+
+beforeEach(() => {
+  cssSupportsMock.mockImplementation((property: string, value: string) => {
+    if (property === 'backdrop-filter' || property === '-webkit-backdrop-filter') {
+      return true
+    }
+
+    if (property === 'filter') {
+      return typeof value === 'string' && value.trim().startsWith('url(')
+    }
+
+    return false
+  })
+})
 
 describe('LiquidGlass', () => {
   afterEach(() => {
     cleanup()
+    cssSupportsMock.mockReset()
     document
       .querySelectorAll('svg[data-rlg-filter]')
       .forEach((node) => node.parentElement?.removeChild(node))
+  })
+
+  afterAll(() => {
+    vi.unstubAllGlobals()
   })
 
   it('renders children content', () => {
@@ -71,5 +98,54 @@ describe('LiquidGlass', () => {
     const filter = document.getElementById('test-distort-filter')
     expect(filter).toBeTruthy()
     expect(filter?.querySelector('feDisplacementMap')?.getAttribute('scale')).toBe('42')
+  })
+
+  it('keeps distortion disabled until toggled on', () => {
+    const { rerender } = render(
+      <LiquidGlass data-testid="distort-toggle" distortion={false} distortionFilterId="toggle-filter">
+        Stable
+      </LiquidGlass>,
+    )
+
+    const element = screen.getByTestId('distort-toggle')
+    expect(element.dataset.liquidGlassDistortion).toBeUndefined()
+    expect(element.style.getPropertyValue('--rlg-backdrop-filter-prefix')).toBe('')
+    expect(document.getElementById('toggle-filter')).toBeNull()
+
+    rerender(
+      <LiquidGlass
+        data-testid="distort-toggle"
+        distortion
+        distortionFilterId="toggle-filter"
+        distortionScale={24}
+      >
+        Stable
+      </LiquidGlass>,
+    )
+
+    const updated = screen.getByTestId('distort-toggle')
+    expect(updated.dataset.liquidGlassDistortion).toBe('')
+    expect(updated.style.getPropertyValue('--rlg-backdrop-filter-prefix')).toBe('url(#toggle-filter) ')
+    expect(document.getElementById('toggle-filter')).not.toBeNull()
+  })
+
+  it('suppresses distortion when CSS filter support is unavailable', () => {
+    cssSupportsMock.mockReturnValue(false)
+
+    render(
+      <LiquidGlass
+        data-testid="unsupported-distort"
+        distortion
+        distortionFilterId="unsupported-filter"
+        distortionScale={64}
+      >
+        Unsupported
+      </LiquidGlass>,
+    )
+
+    const element = screen.getByTestId('unsupported-distort')
+    expect(element.dataset.liquidGlassDistortion).toBeUndefined()
+    expect(element.style.getPropertyValue('--rlg-backdrop-filter-prefix')).toBe('')
+    expect(document.getElementById('unsupported-filter')).toBeNull()
   })
 })

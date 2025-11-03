@@ -1,6 +1,6 @@
-import { forwardRef, useEffect, useMemo } from 'react'
-import type { CSSProperties, HTMLAttributes, ReactNode } from 'react'
-import '../styles.css'
+import { forwardRef, useEffect, useMemo } from 'react';
+import type { CSSProperties, HTMLAttributes, ReactNode } from 'react';
+import '../styles.css';
 
 export type LiquidGlassRef = HTMLDivElement
 
@@ -50,86 +50,86 @@ export interface LiquidGlassProps
 }
 
 type LiquidGlassCSSVariables = CSSProperties & {
-  '--rlg-intensity'?: string
-  '--rlg-tint'?: string
-  '--rlg-highlight-color'?: string
-  '--rlg-highlight-strength'?: string
-  '--rlg-blur-radius'?: string
-  '--rlg-ripple-opacity'?: string
-  '--rlg-backdrop-filter-prefix'?: string
-}
+  '--rlg-intensity'?: string;
+  '--rlg-tint'?: string;
+  '--rlg-highlight-color'?: string;
+  '--rlg-highlight-strength'?: string;
+  '--rlg-blur-radius'?: string;
+  '--rlg-ripple-opacity'?: string;
+  '--rlg-backdrop-filter-prefix'?: string;
+};
 
 const clamp = (value: number, min: number, max: number) => {
-  if (Number.isNaN(value)) return min
-  return Math.min(Math.max(value, min), max)
-}
+  if (Number.isNaN(value)) return min;
+  return Math.min(Math.max(value, min), max);
+};
 
 const mergeClassNames = (...values: Array<string | undefined>) =>
-  values.filter(Boolean).join(' ')
+  values.filter(Boolean).join(' ');
 
 const injectDistortionFilter = (
   filterId: string,
   distortionScale: number,
 ) => {
   if (typeof window === 'undefined' || typeof document === 'undefined') {
-    return
+    return;
   }
 
-  const normalizedScale = Math.min(Math.max(Math.abs(distortionScale), 0), 120)
+  const normalizedScale = Math.min(Math.max(Math.abs(distortionScale), 0), 120);
 
-  const existing = document.getElementById(filterId) as SVGFilterElement | null
+  const existing = document.getElementById(filterId) as SVGFilterElement | null;
   if (existing) {
-    const displacementNode = existing.querySelector('feDisplacementMap')
+    const displacementNode = existing.querySelector('feDisplacementMap');
     if (displacementNode) {
-      displacementNode.setAttribute('scale', normalizedScale.toString())
+      displacementNode.setAttribute('scale', normalizedScale.toString());
     }
-    return
+    return;
   }
 
-  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
-  svg.setAttribute('aria-hidden', 'true')
-  svg.setAttribute('focusable', 'false')
-  svg.style.position = 'absolute'
-  svg.style.width = '0'
-  svg.style.height = '0'
-  svg.style.visibility = 'hidden'
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('aria-hidden', 'true');
+  svg.setAttribute('focusable', 'false');
+  svg.style.position = 'absolute';
+  svg.style.width = '0';
+  svg.style.height = '0';
+  svg.style.visibility = 'hidden';
 
-  const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs')
-  const filter = document.createElementNS('http://www.w3.org/2000/svg', 'filter')
-  filter.id = filterId
-  svg.setAttribute('data-rlg-filter', filterId)
+  const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+  const filter = document.createElementNS('http://www.w3.org/2000/svg', 'filter');
+  filter.id = filterId;
+  svg.setAttribute('data-rlg-filter', filterId);
 
   const turbulence = document.createElementNS(
     'http://www.w3.org/2000/svg',
     'feTurbulence',
-  )
-  turbulence.setAttribute('type', 'fractalNoise')
-  turbulence.setAttribute('baseFrequency', '0.004 0.0055')
-  turbulence.setAttribute('numOctaves', '2')
-  turbulence.setAttribute('seed', '7')
-  turbulence.setAttribute('result', 'distortNoise')
+  );
+  turbulence.setAttribute('type', 'fractalNoise');
+  turbulence.setAttribute('baseFrequency', '0.004 0.0055');
+  turbulence.setAttribute('numOctaves', '2');
+  turbulence.setAttribute('seed', '7');
+  turbulence.setAttribute('result', 'distortNoise');
 
-  const blur = document.createElementNS('http://www.w3.org/2000/svg', 'feGaussianBlur')
-  blur.setAttribute('in', 'distortNoise')
-  blur.setAttribute('stdDeviation', '6.5')
-  blur.setAttribute('result', 'softNoise')
+  const blur = document.createElementNS('http://www.w3.org/2000/svg', 'feGaussianBlur');
+  blur.setAttribute('in', 'distortNoise');
+  blur.setAttribute('stdDeviation', '6.5');
+  blur.setAttribute('result', 'softNoise');
 
   const displacement = document.createElementNS(
     'http://www.w3.org/2000/svg',
     'feDisplacementMap',
-  )
-  displacement.setAttribute('in', 'SourceGraphic')
-  displacement.setAttribute('in2', 'softNoise')
-  displacement.setAttribute('scale', normalizedScale.toString())
-  displacement.setAttribute('xChannelSelector', 'R')
-  displacement.setAttribute('yChannelSelector', 'G')
+  );
+  displacement.setAttribute('in', 'SourceGraphic');
+  displacement.setAttribute('in2', 'softNoise');
+  displacement.setAttribute('scale', normalizedScale.toString());
+  displacement.setAttribute('xChannelSelector', 'R');
+  displacement.setAttribute('yChannelSelector', 'G');
 
-  filter.appendChild(turbulence)
-  filter.appendChild(blur)
-  filter.appendChild(displacement)
-  defs.appendChild(filter)
-  svg.appendChild(defs)
-  document.body.appendChild(svg)
+  filter.appendChild(turbulence);
+  filter.appendChild(blur);
+  filter.appendChild(displacement);
+  defs.appendChild(filter);
+  svg.appendChild(defs);
+  document.body.appendChild(svg);
 }
 
 export const LiquidGlass = forwardRef<LiquidGlassRef, LiquidGlassProps>(
@@ -152,26 +152,39 @@ export const LiquidGlass = forwardRef<LiquidGlassRef, LiquidGlassProps>(
     },
     ref,
   ) => {
-    const variables = useMemo<LiquidGlassCSSVariables>(() => {
-      const cssVariables: LiquidGlassCSSVariables = {}
+    const supportsCssFeature = (property: string, value: string) =>
+      typeof CSS !== 'undefined' && typeof CSS.supports === 'function'
+        ? CSS.supports(property, value)
+        : false;
 
-      cssVariables['--rlg-intensity'] = clamp(intensity, 0, 1).toFixed(3)
-      cssVariables['--rlg-ripple-opacity'] = clamp(ripple, 0, 1).toFixed(3)
+    const supportsBackdropFilter =
+      supportsCssFeature('backdrop-filter', 'blur(1px)') ||
+      supportsCssFeature('-webkit-backdrop-filter', 'blur(1px)');
+
+    const isFirefox = navigator.userAgent.includes('Firefox');
+    const supportsSvgFilter = supportsCssFeature('filter', `url(#${distortionFilterId})`);
+
+    const shouldApplyDistortion = distortion && supportsBackdropFilter && supportsSvgFilter && !isFirefox;
+
+    const variables = useMemo<LiquidGlassCSSVariables>(() => {
+      const cssVariables: LiquidGlassCSSVariables = {};
+      cssVariables['--rlg-intensity'] = clamp(intensity, 0, 1).toFixed(3);
+      cssVariables['--rlg-ripple-opacity'] = clamp(ripple, 0, 1).toFixed(3);
       cssVariables['--rlg-highlight-strength'] = clamp(
         highlightStrength,
         0,
         1,
-      ).toFixed(3)
+      ).toFixed(3);
       cssVariables['--rlg-blur-radius'] = `${clamp(blurRadius, 0, 120).toFixed(
         0,
-      )}px`
-      cssVariables['--rlg-highlight-color'] = highlightColor
-      cssVariables['--rlg-tint'] = tint
-      cssVariables['--rlg-backdrop-filter-prefix'] = distortion
+      )}px`;
+      cssVariables['--rlg-highlight-color'] = highlightColor;
+      cssVariables['--rlg-tint'] = tint;
+      cssVariables['--rlg-backdrop-filter-prefix'] = shouldApplyDistortion
         ? `url(#${distortionFilterId}) `
-        : ''
+        : ' ';
 
-      return cssVariables
+      return cssVariables;
     }, [
       intensity,
       ripple,
@@ -179,23 +192,23 @@ export const LiquidGlass = forwardRef<LiquidGlassRef, LiquidGlassProps>(
       tint,
       highlightColor,
       highlightStrength,
-      distortion,
       distortionFilterId,
+      shouldApplyDistortion,
     ])
 
     const composedStyle: CSSProperties = {
       ...variables,
       ...style,
-    }
+    };
 
     useEffect(() => {
-      if (!distortion) {
-        return
+      if (!shouldApplyDistortion) {
+        return;
       }
 
-      const normalized = clamp(distortionScale, -120, 120)
-      injectDistortionFilter(distortionFilterId, normalized)
-    }, [distortion, distortionFilterId, distortionScale])
+      const normalized = clamp(distortionScale, -120, 120);
+      injectDistortionFilter(distortionFilterId, normalized);
+    }, [shouldApplyDistortion, distortionFilterId, distortionScale]);
 
     return (
       <div
@@ -209,10 +222,10 @@ export const LiquidGlass = forwardRef<LiquidGlassRef, LiquidGlassProps>(
       >
         {children}
       </div>
-    )
-  }
-)
+    );
+  },
+);
 
-LiquidGlass.displayName = 'LiquidGlass'
+LiquidGlass.displayName = 'LiquidGlass';
 
-export default LiquidGlass
+export default LiquidGlass;
