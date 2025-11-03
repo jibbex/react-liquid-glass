@@ -25,7 +25,6 @@
     var(--rlg-tint);
   border: 1px solid var(--rlg-border-color);
   backdrop-filter: var(--rlg-backdrop-filter-prefix) blur(var(--rlg-blur-radius)) saturate(calc(130% + var(--rlg-intensity) * 120%)) brightness(calc(100% + var(--rlg-intensity) * 20%));
-  -webkit-backdrop-filter: var(--rlg-backdrop-filter-prefix) blur(var(--rlg-blur-radius)) saturate(calc(130% + var(--rlg-intensity) * 120%)) brightness(calc(100% + var(--rlg-intensity) * 20%));
   box-shadow:
     0 1.25rem 3.5rem rgba(9, 12, 24, calc(var(--rlg-intensity) * 0.45)),
     inset 0 0 0.75rem rgba(255, 255, 255, 0.04);
