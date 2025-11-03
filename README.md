@@ -13,7 +13,7 @@ A React 18+ component that renders a liquid-glass surface with configurable blur
 ## Installation
 
 ```bash
-npm install react-liquid-glass
+npm install https://github.com/jibbex/react-liquid-glass
 
 # Peer dependencies if you do not already have them
 npm install react react-dom
