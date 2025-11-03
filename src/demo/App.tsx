@@ -335,7 +335,7 @@ const App = () => {
   const [highlightStrength, setHighlightStrength] = useState(0.55)
   const [ripple, setRipple] = useState(0.35)
   const [animated, setAnimated] = useState(true)
-  const [distortion, setDistortion] = useState(true && !isFirefox)
+  const [distortion, setDistortion] = useState(!isFirefox)
   const [distortionScale, setDistortionScale] = useState(48)
   const preset = PRESETS[presetId]
 
