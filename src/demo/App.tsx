@@ -405,7 +405,7 @@ const App = () => {
               <div className="demo-actions">
                 <a
                   className="demo-button demo-button--primary"
-                  href="https://github.com/your-org/react-liquid-glass"
+                  href="https://github.com/jibbex/react-liquid-glass"
                   target="_blank"
                   rel="noreferrer"
                 >
