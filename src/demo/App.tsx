@@ -349,6 +349,7 @@ const App = () => {
       animated,
       distortion,
       distortionScale,
+      blurRadius: 36,
     }),
     [
       preset.tint,
