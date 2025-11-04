@@ -37,8 +37,8 @@
       "import": "./dist/react-liquid-glass.es.js",
       "require": "./dist/react-liquid-glass.cjs"
     },
-    "./styles.css": {
-      "default": "./dist/styles.css"
+    "./style.css": {
+      "default": "./dist/assets/react-liquid-glass.css"
     },
     "./package.json": "./package.json"
   },
