@@ -1,7 +1,8 @@
-import path from 'node:path'
-import react from '@vitejs/plugin-react'
-import { defineConfig } from 'vite'
-import { configDefaults } from 'vitest/config'
+import path from 'node:path';
+import react from '@vitejs/plugin-react';
+import { defineConfig } from 'vite';
+import { configDefaults } from 'vitest/config';
+import dts from 'vite-plugin-dts';
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -11,6 +12,11 @@ export default defineConfig({
         plugins: [['babel-plugin-react-compiler']],
       },
     }),
+    dts({ 
+      tsconfigPath: './tsconfig.lib.json',
+      outDir: 'dist/types',
+      insertTypesEntry: true,
+    })
   ],
   build: {
     sourcemap: true,
@@ -47,4 +53,4 @@ export default defineConfig({
       reporter: ['text', 'html'],
     },
   },
-})
+});
