@@ -1,5 +1,5 @@
 import path from 'node:path';
-import react from '@vitejs/plugin-react';
+import react from '@vitejs/plugin-react-swc';
 import { defineConfig } from 'vite';
 import { configDefaults } from 'vitest/config';
 import dts from 'vite-plugin-dts';
@@ -7,11 +7,7 @@ import dts from 'vite-plugin-dts';
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
-    react({
-      babel: {
-        plugins: [['babel-plugin-react-compiler']],
-      },
-    }),
+    react(),
     dts({ 
       tsconfigPath: './tsconfig.lib.json',
       outDir: 'dist/types',
@@ -28,7 +24,7 @@ export default defineConfig({
       formats: ['es', 'cjs'],
     },
     rollupOptions: {
-      external: ['react', 'react-dom'],
+      external: ['react', 'react-dom', 'react/jsx-runtime'],
       output: {
         globals: {
           react: 'React',
