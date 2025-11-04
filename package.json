@@ -2,7 +2,6 @@
   "name": "react-liquid-glass",
   "version": "0.1.0",
   "private": false,
-  "type": "module",
   "description": "React component library for building liquid glass UI surfaces.",
   "license": "MIT",
   "keywords": [
