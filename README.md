@@ -30,17 +30,16 @@ import 'react-liquid-glass/styles.css'
 export function HeroPane() {
   return (
     <LiquidGlass
+      animated
+      ripple={0.3}
+      blurRadius={16}
       intensity={0.72}
       highlightStrength={0.45}
-      ripple={0.3}
       tint="rgba(120, 227, 255, 0.22)"
       highlightColor="rgba(255, 255, 255, 0.85)"
-      distortion
-      distortionScale={48}
     >
       <span className="rlg-badge">Prototype</span>
       <h2>Liquid interaction surfaces</h2>
-      <p>Swap the styles with your production-ready effect implementation.</p>
     </LiquidGlass>
   )
 }
