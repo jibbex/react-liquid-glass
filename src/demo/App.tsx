@@ -6,7 +6,7 @@ import './App.css'
 const PRESETS = {
   daybreak: {
     label: 'Daybreak Mist',
-    tint: 'rgba(255, 255, 255, 0.18)',
+    tint: 'rgba(255, 255, 255, 0.3)',
     highlightColor: 'rgba(248, 250, 255, 0.85)',
   },
   midnight: {
@@ -349,7 +349,7 @@ const App = () => {
       animated,
       distortion,
       distortionScale,
-      blurRadius: 36,
+      blurRadius: 16,
     }),
     [
       preset.tint,

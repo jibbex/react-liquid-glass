@@ -4,7 +4,7 @@
 
 [data-liquid-glass] {
   --rlg-intensity: 0.65;
-  --rlg-blur-radius: 36px;
+  --rlg-blur-radius: 16px;
   --rlg-highlight-strength: 0.55;
   --rlg-highlight-color: rgba(255, 255, 255, 0.6);
   --rlg-tint: rgba(255, 255, 255, 0.16);
@@ -12,6 +12,7 @@
   --rlg-radius: 28px;
   --rlg-border-color: rgba(255, 255, 255, 0.22);
   --rlg-shadow: rgba(15, 23, 42, 0.35);
+  --rlg-backdrop-filter-prefix: 'rlg-distort-filter';
 
   position: relative;
   display: block;

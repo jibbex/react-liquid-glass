@@ -138,14 +138,14 @@ export const LiquidGlass = forwardRef<LiquidGlassRef, LiquidGlassProps>(
       children,
       className,
       style,
-      intensity = 0.65,
-      ripple = 0.35,
-      blurRadius = 18,
-      tint = 'rgba(255, 255, 255, 0.16)',
+      intensity = 0.45,
+      ripple = 0.6,
+      blurRadius = 16,
+      tint = 'rgba(255, 255, 255, 0.3)',
       highlightColor = 'rgba(255, 255, 255, 0.6)',
       highlightStrength = 0.55,
       animated = true,
-      distortion = false,
+      distortion = true,
       distortionFilterId = 'rlg-distort-filter',
       distortionScale = 36,
       ...rest
@@ -211,16 +211,16 @@ export const LiquidGlass = forwardRef<LiquidGlassRef, LiquidGlassProps>(
     }, [shouldApplyDistortion, distortionFilterId, distortionScale]);
 
     return (
-      <div
-        ref={ref}
-        data-liquid-glass=""
-        data-liquid-glass-animated={animated ? '' : undefined}
-        data-liquid-glass-distortion={distortion ? '' : undefined}
-        className={mergeClassNames('rlg-surface', className)}
-        style={composedStyle}
-        {...rest}
-      >
-        {children}
+        <div
+          ref={ref}
+          data-liquid-glass=""
+          data-liquid-glass-animated={animated ? '' : undefined}
+          data-liquid-glass-distortion={distortion ? '' : undefined}
+          className={mergeClassNames('rlg-surface', className)}
+          style={composedStyle}
+          {...rest}
+        >
+          {children}
       </div>
     );
   },

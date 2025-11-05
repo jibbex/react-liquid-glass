@@ -19,7 +19,7 @@ var clamp = (e, t, n) => Number.isNaN(e) ? t : Math.min(Math.max(e, t), n), merg
 	let l = document.createElementNS("http://www.w3.org/2000/svg", "feDisplacementMap");
 	l.setAttribute("in", "SourceGraphic"), l.setAttribute("in2", "softNoise"), l.setAttribute("scale", n.toString()), l.setAttribute("xChannelSelector", "R"), l.setAttribute("yChannelSelector", "G"), o.appendChild(s), o.appendChild(c), o.appendChild(l), a.appendChild(o), i.appendChild(a), document.body.appendChild(i);
 };
-const LiquidGlass = forwardRef(({ children: e, className: s, style: c, intensity: l = .65, ripple: u = .35, blurRadius: d = 18, tint: f = "rgba(255, 255, 255, 0.16)", highlightColor: p = "rgba(255, 255, 255, 0.6)", highlightStrength: m = .55, animated: h = !0, distortion: g = !1, distortionFilterId: _ = "rlg-distort-filter", distortionScale: v = 36,...y }, b) => {
+const LiquidGlass = forwardRef(({ children: e, className: s, style: c, intensity: l = .45, ripple: u = .6, blurRadius: d = 16, tint: f = "rgba(255, 255, 255, 0.3)", highlightColor: p = "rgba(255, 255, 255, 0.6)", highlightStrength: m = .55, animated: h = !0, distortion: g = !0, distortionFilterId: _ = "rlg-distort-filter", distortionScale: v = 36,...y }, b) => {
 	let x = (e, t) => typeof CSS < "u" && typeof CSS.supports == "function" ? CSS.supports(e, t) : !1, S = x("backdrop-filter", "blur(1px)") || x("-webkit-backdrop-filter", "blur(1px)"), C = navigator.userAgent.includes("Firefox"), w = x("backdrop-filter", `url(#${_})`), T = g && S && w && !C, E = {
 		...useMemo(() => {
 			let e = {};
