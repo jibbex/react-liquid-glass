@@ -4,11 +4,11 @@ A React 18+ component that renders a liquid-glass surface with configurable blur
 
 ## Features
 
-- Component API exposes intensity, tint, ripple, highlight, and distortion controls via props.
+- Component API exposes intensity, tint, ripple, highlight, blur radius, and distortion controls via props.
 - Styling is driven by CSS custom properties so you can override visuals without rebuilding.
 - Automatic SVG filter injection when distortion is enabled (no manual defs required).
 - TypeScript-first Vite build that emits ESM, CJS, and type declarations in a single step.
-- Demo site checked into `demo-dist/` and published through GitHub Pages for reference.
+- [Demo site](https://jibbex.github.io/react-liquid-glass/) checked into `demo-dist/` and published through GitHub Pages for reference.
 
 ## Installation
 
@@ -83,6 +83,7 @@ Importing `react-liquid-glass/styles.css` pulls in the default styling. Copy the
 - `npm run dev` – start the Vite playground served from `src/demo`.
 - `npm run build` – type-check and compile the library into `dist/` (ESM, CJS, styles, declarations).
 - `npm run build:demo` – bundle the playground into `demo-dist/` for static hosting.
+- `npm run clean` – clean `dist/` directory.
 - `npm run preview` – preview the latest playground build locally.
 - `npm run test` / `npm run test:watch` – run the Vitest suite against the component.
 - `npm run lint` – lint the project with ESLint.
